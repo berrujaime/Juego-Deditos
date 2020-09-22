@@ -112,7 +112,7 @@ void instrucciones(){
 }
 
 void jugar(){
-	int variar_jugador=0, a=1, b=1, c=1, d=1, jugada, dedos_antes, dedos_ahora, num_jugador, correcto;
+	int variar_jugador=0, a=1, b=1, c=1, d=1, jugada, dedos_antes, dedos_ahora, num_jugador, correcto, fin=0;
 	char jugador[LONGITUD_NOMBRE], mano_propia, mano_enemiga;
 	
 	printf("\nComienza el juego ^^");
@@ -128,6 +128,10 @@ void jugar(){
 			num_jugador=2;
 		}
 		
+		printf("\n\nJuega %s",jugador);
+		//AÑADIR AQUÍ QUE SI UNA MANO ES 5 O SUPERIOR PONERLA A 0
+		
+		
 		printf("\nManos %s: [ %i | %i ]", Nombre1,a,b);
 		printf("\nManos %s: [ %i | %i ]", Nombre2,c,d);
 		
@@ -141,24 +145,24 @@ void jugar(){
 					dedos_antes=a+b;
 				}
 				else{
-					dedos_antes=a+b;
+					dedos_antes=c+d;
 				}
-				printf("\nIntroduzca nueva configuración:");
+				printf("\nIntroduzca nueva configuracion:");
 				do{
 					if(num_jugador==1){
-						printf("Dedos mano izquierda: ");
+						printf("\nDedos mano izquierda: ");
 						scanf("%i",&a);
 							limpiarBuffer();
-						printf("Dedos mano derecha: ");
+						printf("\nDedos mano derecha: ");
 						scanf("%i",&b);
 							limpiarBuffer();
 						dedos_ahora=a+b;
 					}
 					else{
-						printf("Dedos mano izquierda: ");
+						printf("\nDedos mano izquierda: ");
 						scanf("%i",&c);
 							limpiarBuffer();
-						printf("Dedos mano derecha: ");
+						printf("\nDedos mano derecha: ");
 						scanf("%i",&d);
 							limpiarBuffer();
 						dedos_ahora=c+d;
@@ -167,11 +171,11 @@ void jugar(){
 			}
 			else{
 				if(jugada!=2){
-					printf("Ha introducido una jugada incorrecta");
+					printf("\nHa introducido una jugada incorrecta");
 				}
 				else{
 					do{
-						printf("Pulse i si deseas sumar los dedos de tu mano izquierda o d si deseas sumar los de tu mano derecha: ");
+						printf("\nPulse i si deseas sumar los dedos de tu mano izquierda o d si deseas sumar los de tu mano derecha: ");
 						mano_propia=getchar();
 							limpiarBuffer();
 						if(mano_propia=='d')
@@ -185,7 +189,7 @@ void jugar(){
 					
 					
 					do{
-						printf("A que mano del enemigo le sumamos (i para izquierda o d para derecha)?: ");
+						printf("\nA que mano del enemigo le sumamos (i para izquierda o d para derecha)?: ");
 						mano_enemiga=getchar();
 							limpiarBuffer();
 						if(mano_enemiga=='d')
@@ -196,21 +200,57 @@ void jugar(){
 							else
 								correcto=0;		
 					}while(correcto!=1);
-				
-				if(mano_propia=='i' && mano_enemiga=='i')
-					c=a+c;
-				if(mano_propia=='i' && mano_enemiga=='d')
-					d=a+d;
-				if(mano_propia=='d' && mano_enemiga=='i')
-					c=b+c;
-				if(mano_propia=='d' && mano_enemiga=='d')
-					d=b+d;
+					if(num_jugador==1){
+						if(mano_propia=='i' && mano_enemiga=='i')
+							c=a+c;
+						if(mano_propia=='i' && mano_enemiga=='d')
+							d=a+d;
+						if(mano_propia=='d' && mano_enemiga=='i')
+							c=b+c;
+						if(mano_propia=='d' && mano_enemiga=='d')
+							d=b+d;
+					}
+					else{
+						if(mano_propia=='i' && mano_enemiga=='i')
+							a=c+a;
+						if(mano_propia=='i' && mano_enemiga=='d')
+							b=c+b;
+						if(mano_propia=='d' && mano_enemiga=='i')
+							a=d+a;
+						if(mano_propia=='d' && mano_enemiga=='d')
+							b=d+b;
+					}
 				}
 			}	
-		}while(jugada!=1 && jugada!=2);
+		}while(jugada==0 || jugada>2);
+		
 		
 		variar_jugador++;
 		
-	}while(!((a>4 && b>4) || (c>4 && d>4))); //esta es la condicion de parada, si no funciona así poner un if delante con una variable auxiliar
+		if(a>4)
+			a=0;
+		if(b>4)
+			b=0;
+		if(c>4)
+			c=0;	
+		if(d>4)
+			d=0;
+			
+		if(a==0 && b==0)
+		fin=1;
+		if(c==0 && d==0)
+		fin=1;
+		
+	}while(fin==0); //esta es la condicion de parada, si no funciona así poner un if delante con una variable auxiliar (parece que funciona)
 	
+	variar_jugador=variar_jugador-1;
+	
+	if(variar_jugador%2==0){
+			strcpy(jugador,Nombre1);
+	}
+	else{
+			strcpy(jugador,Nombre2);
+	}
+	
+	printf("\n\nGana %s",jugador);
 }
