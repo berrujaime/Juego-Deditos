@@ -1,0 +1,47 @@
+SALIDA:
+
+Bienvenidos al juego de los deditos.
+Jugador1 introduce tu nombre: 
+Jugador2 introduce tu nombre:
+(a partir de aquí saldrán los nombres en vez de Jugador1 y Jugador2)
+
+¿Sabes jugar al juego? Responde y si sabes o n si no sabes.
+...
+
+(Caso n)
+Comienza el juego.
+
+Comienza Jugador1:
+
+do
+	hacer un if para ir variando entre jugador 1 o jugador 2 (si es par o inpar cambiamos entre jugador - hacer función externa)
+		Turno Jugador x:
+
+		Manos jugador1: a b (hacer un diseño con cuadrados o algo)
+		Manos jugador2: c d (diseño...)
+		¿Qué jugada quieres hacer? Pulsa 1 para cambiar dedos entre las manos o 2 si deseas sumar dedos al enemigo.
+
+		(caso 1)
+		Introduzca nueva configuración:
+		do
+
+		Dedos izquierda: 
+		Dedos derecha:
+
+		(while dedos_antes != dedos_ahora)
+
+		(Caso 2)
+
+		Pulse i si deseas sumar los dedos de tu mano izquierda o d si deseas sumar los de tu mano derecha: ...
+		¿A qué mano del enemigo le sumamos (i para izquierda o d para derecha)? ...
+
+		Manos jugador1: 1 1 (hacer un diseño con cuadrados o algo)
+		Manos jugador2: 1 1 (diseño...)
+	valor_if ++
+while(alguna mano < 5)
+
+Ganador: Jugadorx (saber con la variable del if de antes)
+Fin del juego
+
+
+
