@@ -9,6 +9,9 @@ Jugador2 introduce tu nombre:
 ...
 
 (Caso n)
+explicacion
+
+(caso s)
 Comienza el juego.
 
 Comienza Jugador1:
@@ -44,4 +47,5 @@ Ganador: Jugadorx (saber con la variable del if de antes)
 Fin del juego
 
 
-
+Posibles mejoras:
+	Añadir que el programa calcule cuando hay un jaque mate y jaque (se elimina una mano pero el jugador sigue vivo)

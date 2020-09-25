@@ -12,7 +12,7 @@
 #include <string.h>
 
 /* Constantes define */
-#define LONGITUD_NOMBRE 10
+#define LONGITUD_NOMBRE 20
 
 /* Prototipos de las funciones utilizadas */
 void pedirNombres();
@@ -84,11 +84,11 @@ int limpiarBuffer(){
 }
 
 void pedirNombres(){
-	printf("\nJugador1, introduce tu nombre (maximo 10 letras): ");
-	scanf("%s",Nombre1);
+	printf("\nJugador1, introduce tu nombre (maximo 20 letras): ");
+	scanf("%[^\n]",Nombre1);
 	limpiarBuffer();
-	printf("\nJugador2, introduce tu nombre (maximo 10 letras): ");
-	scanf("%s",Nombre2);
+	printf("\nJugador2, introduce tu nombre (maximo 20 letras): ");
+	scanf("%[^\n]",Nombre2);
 	limpiarBuffer();
 }
 
@@ -112,7 +112,7 @@ void instrucciones(){
 }
 
 void jugar(){
-	int variar_jugador=0, a=1, b=1, c=1, d=1, jugada, dedos_antes, dedos_ahora, num_jugador, correcto, fin=0;
+	int variar_jugador=0, a=1, b=1, c=1, d=1, jugada, dedos_antes, dedos_ahora, num_jugador, correcto, fin=0, a_antes, b_antes, c_antes, d_antes;
 	char jugador[LONGITUD_NOMBRE], mano_propia, mano_enemiga;
 	
 	printf("\nComienza el juego ^^");
@@ -129,11 +129,10 @@ void jugar(){
 		}
 		
 		printf("\n\nJuega %s",jugador);
-		//AÑADIR AQUÍ QUE SI UNA MANO ES 5 O SUPERIOR PONERLA A 0
 		
 		
-		printf("\nManos %s: [ %i | %i ]", Nombre1,a,b);
-		printf("\nManos %s: [ %i | %i ]", Nombre2,c,d);
+		printf("\nManos %20s: [ %i | %i ]", Nombre1,a,b);
+		printf("\nManos %20s: [ %i | %i ]", Nombre2,c,d);
 		
 		do{
 		printf("\nQue jugada quieres hacer? Pulsa 1 para cambiar dedos entre las manos o 2 si deseas sumar dedos al enemigo: ");
@@ -147,8 +146,13 @@ void jugar(){
 				else{
 					dedos_antes=c+d;
 				}
-				printf("\nIntroduzca nueva configuracion:");
+
+				a_antes=a;
+				b_antes=b;
+				c_antes=c;
+				d_antes=d;
 				do{
+					printf("\nIntroduzca nueva configuracion:");
 					if(num_jugador==1){
 						printf("\nDedos mano izquierda: ");
 						scanf("%i",&a);
@@ -157,6 +161,8 @@ void jugar(){
 						scanf("%i",&b);
 							limpiarBuffer();
 						dedos_ahora=a+b;
+						c_antes=6;
+						d_antes=7;
 					}
 					else{
 						printf("\nDedos mano izquierda: ");
@@ -166,8 +172,10 @@ void jugar(){
 						scanf("%i",&d);
 							limpiarBuffer();
 						dedos_ahora=c+d;
+						a_antes=6;
+						b_antes=7;
 					}
-				}while(dedos_antes != dedos_ahora);
+				}while((dedos_antes != dedos_ahora) || (a<0)  || (b<0)  || (c<0)  || (d<0) || ((a==a_antes) && (b==b_antes)) || ((c==c_antes) && (d==d_antes)));
 			}
 			else{
 				if(jugada!=2){
